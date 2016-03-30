@@ -1,0 +1,216 @@
+.max-width{
+	max-width:640px;
+}
+.mg-center{
+	margin:0 auto;
+}
+.mb10{
+	margin-bottom: 10px;
+}
+.mt10{
+	margin-top: 10px;
+}
+.tag{
+	background: #eff6fa;
+	padding: 1px 10px 0;
+	border-radius: 30px;
+	text-decoration: none;
+	margin: 0 5px 5px 0;
+	display: inline-block;
+	color: #259;
+	white-space: nowrap;
+	font-size: 14px;
+}
+.booklist-item .minisubmit {
+  color: #bbb
+}
+
+.booklist-item .minisubmit:hover {
+  color: white;
+  background-color: #bbb
+}
+
+
+.booklist-item {
+  margin: 20px 0
+}
+
+.booklist-item .mod {
+  position: relative;
+  padding: 10px;
+  background: #f5f5f5;
+  color: #666;
+  word-wrap: break-word
+}
+
+.booklist-item .hd .pos {
+  position: relative;
+  top: -10px;
+  display: inline-block;
+  padding: 0 10px;
+  background: #e3e3e3;
+  color: #a1a1a1;
+  line-height: 18px;
+  border-radius: 0 0 4px 4px
+}
+
+.booklist-item .bd {
+  padding: 20px;
+  background: #fff;
+  overflow: hidden;
+  *zoom: 1;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.2)
+}
+
+.booklist-item .bd .title+.meta {
+  margin-top: -4px
+}
+
+.booklist-item .bd .doulist-add-btn {
+  float: right
+}
+
+.booklist-item .bd .meta {
+  display: none;
+  margin: 6px 0 4px
+}
+
+.booklist-item .bd .meta a:link,.booklist-item .bd .meta a:visited {
+  color: #666
+}
+
+.booklist-item .bd .meta a:hover {
+  color: #fff
+}
+
+.booklist-item .bd .favs {
+  margin-left: 10px
+}
+
+.booklist-item .bd .pic {
+  float: right;
+  margin-left: 30px
+}
+
+.booklist-item .bd .pic img {
+  max-width: 120px
+}
+
+.booklist-item .bd .abstract {
+  overflow: hidden;
+  *zoom: 1
+}
+.booklist-item .bd .abstract p{
+  
+}
+.booklist-item .ft {
+  padding: 10px 20px 0
+}
+.booklist-item .ft a{
+   color: #337ab7;
+}  
+.booklist-item .ft .time {
+  display: block;
+  color: #999;
+  float: left;
+  margin-top: 8px;
+}
+
+.booklist-item .title {
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1.3;
+  color: #8f8f8f;
+    overflow: hidden;
+  height: 1.3em !important;
+}
+.booklist-item .title a{
+  margin-right:10px;
+
+
+}
+.booklist-item .source {
+  display: none
+}
+
+.booklist-item textarea {
+  font-size: 12px
+}
+
+
+.booklist-item .booklist-subject .post {
+  position: relative;
+  float: left;
+  margin-right: 20px;
+  box-shadow: 0 0 1px rgba(0,0,0,0.1)
+}
+.booklist-item .booklist-subject .post .imgextra {
+  width: 100%;
+  left: 0px;
+  position: absolute;
+  text-align: center;
+  bottom: -10px;
+}
+.booklist-item .booklist-subject .title {
+  margin-bottom: 6px
+}
+
+.booklist-item .booklist-subject .source {
+  clear: both
+}
+
+.booklist-item .booklist-subject .rating {
+  margin: 6px 0 4px 120px
+}
+
+.booklist-item .booklist-subject .rating_nums {
+  color: #666;
+  font-size: 12px
+}
+
+.booklist-item .booklist-subject .abstract {
+  margin-left: 120px
+}
+
+
+.booklist-item .booklist-item-opt {
+    float: right;
+    text-align: right
+}
+.booklist-item .booklist-item-opt a{
+  color:#337ab7;
+  margin-right:10px;
+}
+.booklist-item .booklist-item-opt a.btn-danger{
+
+  color:#fff;
+}
+.booklist-item blockquote {
+  padding: 0;
+  margin: 0;
+  background: 0;
+  font-size:14px;
+  border-left:none;
+}
+
+.booklist-item blockquote span {
+  color: #404040
+}
+
+.booklist-item .form-desc p {
+  font-size: 14px
+}
+
+.booklist-item-opt {
+  float: right;
+  text-align: right;
+  margin-top: 8px;
+}
+
+.booklist_item p {
+  word-break: break-all;
+}
+.pagination{
+	margin: 0 0!important; 
+	display: block!important;
+}
