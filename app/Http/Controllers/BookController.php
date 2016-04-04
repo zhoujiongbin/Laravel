@@ -64,8 +64,9 @@ class BookController extends Controller
         if(!$bookInfo) {
             return view('errors.404');
         }
+        $comment = $this->comments($id);
         $intro = DB::table('book_intro')->where('id', $id)->first();
-        return view('book')->with(['book' => $bookInfo, 'intro' => $intro->intro]);
+        return view('book')->with(['book' => $bookInfo, 'intro' => $intro->intro, 'comment' => $comment]);
 
     }
 
@@ -79,7 +80,15 @@ class BookController extends Controller
     {
         //
     }
-
+    //获取评论
+    public function comments($id){
+        $info = DB::table('comment')->where('book_id', $id)->where('to', 0)->orderBy('updatetime', 'desc')->take(20)->get();
+        foreach ($info as $key => $value) {
+            $tmp = DB::table('user')->where('id', $value->user_id)->first();
+            $info[$key]->username = $tmp->username;
+        }
+        return $info;
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -90,6 +99,19 @@ class BookController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+    //获取全部评论
+    public function allComments(){
+        $info = DB::table('comment')->where('to', 0)->orderBy('updatetime', 'desc')->simplepaginate(20);
+         foreach ($info as $key => $value) {
+            $tmp = DB::table('user')->where('id', $value->user_id)->first();
+            $info[$key]->username = $tmp->username;
+            $tmp = DB::table('book')->where('id', $value->book_id)->first();
+            $info[$key]->bookname = $tmp->name;
+            $dd = Carbon::parse($value->updatetime);
+            $info[$key]->Humans = $dd->diffForHumans(Carbon::now());   //2年前
+        }
+        return view('comments')->with(['comment' => $info]);
     }
 
     /**

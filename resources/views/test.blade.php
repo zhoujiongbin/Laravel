@@ -160,4 +160,5 @@ $(function () {
 	$("#qidiantop").append(str);
 })
 </script>
+</div>
 @include("footer")

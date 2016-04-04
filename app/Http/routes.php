@@ -10,13 +10,10 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::get('/',function () {
-    return view('index');
-});
 
-Route::get('test', 'IndexController@index');
+Route::get('/', 'IndexController@index');
 
-Route::post('login', 'UserController@login');
+Route::any('login', 'UserController@login');
 
 Route::any('sign', 'UserController@index');
 
@@ -30,10 +27,28 @@ Route::get('tag/{name}', 'BookController@tag');
 
 Route::get('api/addShelf', 'APIController@addShelf');
 
+Route::get('api/changeShelf', 'APIController@changeShelf');
+
 Route::get('api/zongheng/{type}/{num}', 'APIController@zongheng')->where('num', '[0-9]+');
 
 Route::get('api/bookshelf/{type}', 'APIController@userShelf')->where('type', '^[0,1,2,3]$');
 
-Route::get('top/', function(){
+Route::any('user/{id}/setting', 'UserController@update')->where('id', '[0-9]+');
+
+Route::post('api/addComment', 'APIController@addComment');
+
+Route::post('api/addBooklist',  'BookListController@create');
+
+Route::get('user/{id}/comments', 'UserController@comment')->where('id', '[0-9]+');
+
+Route::get('user/{id}/booklist', 'UserController@booklist')->where('id', '[0-9]+');
+
+Route::get('comments', 'BookController@allComments');
+
+Route::get('top', function(){
 	return view('top');
+});
+
+Route::get('booklist', function(){
+	return view('booklist');
 });

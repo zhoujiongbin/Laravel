@@ -79,12 +79,12 @@
 									<div class="mod">
 										<div class="bd booklist-subject">
 											<div data-cls="btn-sm" data-bid="{{ $val->id }}" data-shelfstat="undefined" data-menu="right" class="pull-right hidden-xs btn-group initshelf">
-												<a onclick="ys.common.changeBookShelfState(this)" data-state="follow" data-bid="{{ $val->id }}" class="btn btn-sm btn-primary">加入书架</a>
+												<a onclick="addShelf({{ $uid }},{{ $val->id }},0)" data-state="follow" data-bid="{{ $val->id }}" class="btn btn-sm btn-primary">加入书架</a>
 												<div class="btn-group">
 													<button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-sm btn-primary"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
 													<ul role="menu" class="dropdown-menu dropdown-menu-right">
-														<li><a href="javascript:;" onclick="ys.common.changeBookShelfState(this);" data-state="wait" data-bid="{{ $val->id }}"> 加入待看 </a></li>
-														<li><a href="javascript:;" onclick="ys.common.changeBookShelfState(this);" data-state="already" data-bid="{{ $val->id }}"> 已经看完 </a></li>
+														<li><a href="javascript:;" onclick="addShelf({{ $uid }},{{ $val->id }},0);" data-state="wait" data-bid="{{ $val->id }}"> 加入待看 </a></li>
+														<li><a href="javascript:;" onclick="addShelf({{ $uid }},{{ $val->id }},1);" data-state="already" data-bid="{{ $val->id }}"> 已经看完 </a></li>
 														<li class="divider"></li>
 														<li><a href="javascript:;">取消</a></li>
 													</ul>
@@ -93,7 +93,7 @@
 											<div class="post">
 												<a href="/book/{{ $val->id }}" target="_blank"><img src="{{ $val->img_url }}" style="max-height:125px;max-width:100px;"></a>
 												<div data-cls="btn-block" data-bid="{{ $val->id }}" data-shelfstat="undefined" data-nomenu="true" class="imgextra visible-xs-block btn-group initshelf">
-													<a onclick="ys.common.changeBookShelfState(this)" data-state="follow" data-bid="{{ $val->id }}" class="btn btn-block btn-primary">加入书架</a>
+													<a onclick="addShelf({{ $uid }},{{ $val->id }},0);" data-state="follow" data-bid="{{ $val->id }}" class="btn btn-block btn-primary">加入书架</a>
 												</div>
 											</div>
 											<div class="title">

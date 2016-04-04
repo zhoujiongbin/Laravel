@@ -6,9 +6,7 @@
 	<div class="row">
 		<div class="col-md-7 col-sm-12"><div  id="booktag" class="sokk-book-buttons"><a href="/tag/{{ $book->tag }}" style="background-color:#5bc0de;color:#fff" class="tag category">{{ $book->tag }}</a></div>
 	</div>
-	<div class="row">
 	<div class="col-md-12">
-		<div class="row">
 			<div class="col-sm-7">
 				<div style="height:30px;line-height:30px;">
 					<span style="font-size:18px;font-weight:bold;">{{ $book->name }}</span>
@@ -79,32 +77,13 @@
 			<div class="col-sm-7 col-sm-pull-5">
 				<div class="sokk-book-button-groups">
 					<div class="btn-group">
-						<button data-readstate="follow" data-bid="{{ $book->id }}" class="sokk-readstate-btn btn btn-default">追看本书</button><button data-readstate="wait" data-bid="{{ $book->id }}" class="sokk-readstate-btn btn btn-default">养肥本书</button><button data-readstate="already" data-bid="{{ $book->id }}" class="sokk-readstate-btn btn btn-default">已看本书</button>
-					</div>
-					<div class="btn-group">
-						<button id="btn-rubbish" data-readstate="rubbish" data-bid="{{ $book->id }}" class="btn sokk-readstate-btn btn-default">不看本书</button>
+						<button onclick="addShelf({{ $uid }},{{ $book->id }},0);" class="sokk-readstate-btn btn btn-default">追看本书</button>
+						<button onclick="addShelf({{ $uid }},{{ $book->id }},2);" class="sokk-readstate-btn btn btn-default">养肥本书</button>
+						<button onclick="addShelf({{ $uid }},{{ $book->id }},1);" class="sokk-readstate-btn btn btn-default">已看本书</button>
 					</div>
 					<div class="btn-group">
 						<button onclick="ys.book.tobooklist();" class="btn btn-warning">加入推书单</button>
 					</div>
-					<div class="btn-group">
-						<a href="/newthread/{{ $book->id }}" target="_blank" class="btn btn-default">写书评</a>
-					</div>
-				</div>
-			</div>
-			<div class="hide">
-				<div id="readstatewait">
-					<div class="input-group">
-						<span class="input-group-addon">本书到了</span><input type="text" value="30" name="wordnum" onfocus="ys.book.inputFocus(this)" onblur="ys.book.inputBlur(this)" class="form-control"><span class="input-group-addon">万字后提醒我</span>
-					</div>
-				</div>
-				<div id="writecontent">
-					<div class="form-group">
-						<input type="text" name="title" value="" class="form-control"><br>
-						<textarea rows="6" name="content" class="form-control"></textarea>
-					</div>
-				</div>
-				<div id="tobooklist" data-url="/ajax/getsimplebooklist">
 				</div>
 			</div>
 		</div>
@@ -118,8 +97,54 @@
 				</div>
 			</div>
 		</div>
+		<div class="clearfix"></div> 
+<div id="content"  class="row js-masonry">
+	@if($uid != 0)
+	<div class="col-sm-12 col-lg-12 col-xs-12 needmasonry">
+		<div style="border-color:#3cf;border-width:2px;" class="thumbnail">
+			<div class="caption">
+				<form onsubmit="return false;" method="post" class="form">
+					{!! csrf_field() !!}
+					<div class="media">
+						<input type="hidden" id="bookid" name="bookid" value="{{ $book->id }}"><button onclick="comments(0);" class="pull-right btn btn-primary btn-sm">发表书评</button><a href="/user/{{ $uid }}/comments" target="_blank" class="pull-left"><img src="http://guiyu.org/images/logo.png"  class="img-rounded img48"></a>
+						<div class="media-body">
+							<span class="media-heading f16">{{ $username }}</span><br>
+						</div>
+					</div>
+					<textarea id="comment" style="margin-top:5px;height:100px;" name="content" placeholder="短评,最多不能超过300字" class="form-control"></textarea>
+					<div class="status">
+						最大输入300个字
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
-</div>	
+	@endif
+	@foreach($comment as $key => $val)
+	<div class="col-sm-12 col-lg-12 col-xs-12 needmasonry">
+		<div data-id='{{ $val->id }}' class="thumbnail">
+			<div class="caption">
+				<div  class="media clearfix">
+					<a href="/user/{{ $val->user_id }}/comments" target="_blank" class="pull-left"><img src="http://guiyu.org/images/logo.png"  class="img-rounded img48"></a>
+					<div class="media-body">
+						<a href="/user/{{ $val->user_id }}/comments" target="_blank"><span  class="media-heading f16">{{ $val->username }}</span></a><br>
+						<span class="small pull-right">{{  $val->updatetime }}         </span>
+					</div>
+				</div>
+				<p class="commentcontent">
+					{{ $val->content }}
+				</p>
+				<hr>
+				<div data-id='{{ $val->id }}' style="width:100%" class="btn-group">
+					<button type="button" onclick="" style="width:50%" class="btn btn-default"><i class="fa fa-heart-o"></i>&nbsp;喜欢 <span class="num"></span></button><button type="button"  style="width:50%" class="btn btn-default"><i class="fa fa-reply"></i>&nbsp;评论<span class="num"></span></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	@endforeach
+	</div>
+</div>
+
 
 
 @include("footer")

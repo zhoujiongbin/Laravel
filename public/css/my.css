@@ -14,6 +14,13 @@ body{
 .common-footer ul, .common-footer li {
   display: inline;
 }
+.img48{
+  width: 48px;
+  height: 48px;
+}
+.f16{
+  font-size: 16px;
+}
 .fixed20{
   height:20px;
   max-height: 20px;
@@ -832,7 +839,7 @@ margin-bottom: 10px;
   background-color: #f8f8f8;
   padding-top: 15px;
   margin-bottom: 10px;
-  background-image: url(http://ww2.sinaimg.cn/large/88c25655jw1evdl0jc2d6j20og06474l.jpg);
+  background-image: url(http://guiyu.org/images/bg.jpg);
 }
 .ys-userpage-leftpane{
   margin-bottom: 1em;
