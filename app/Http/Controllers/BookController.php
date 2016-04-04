@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 use DB;
 use Carbon\Carbon;
 
@@ -51,6 +52,14 @@ class BookController extends Controller
      */
     public function show($id)
     {
+        if(!is_numeric($id)){
+            $bookInfo = DB::table('book')->where('name', $id)->first();
+            if(!$bookInfo) {
+                return view('errors.404');
+            }else{
+                return Redirect::to('book/'.$bookInfo->id);
+            }
+        }
         $bookInfo = DB::table('book')->where('id', $id)->first();
         if(!$bookInfo) {
             return view('errors.404');
@@ -137,7 +146,7 @@ class BookController extends Controller
                 $query = $query->orderBy($sort, 'desc');
             }
 
-            $book  = $query->paginate(20);;
+            $book  = $query->simplepaginate(20);;
             $total = ceil($query->count() / 20 );
             $tag   = DB::table('book_tag')->get();
             foreach ($book as $key => $value) {

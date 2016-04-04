@@ -27,7 +27,7 @@
 						</div>
 						<form id="globalsearchform" style="margin-bottom:10px;" onsubmit="" class="form">
 							<div class="input-group">
-								<input id="globalsearchtxt" type="text" name="searchTextInput" placeholder="输入书名/作者名/用户/书单" class="form-control"><span class="input-group-btn"><button type="button" onclick="ys.common.globalsearch()" class="btn btn-default">搜索</button></span>
+								<input id="globalsearchtxt" type="text" name="searchTextInput" placeholder="输入书名/作者名/书单" class="form-control"><span class="input-group-btn"><button type="button" onclick="ys.common.globalsearch()" class="btn btn-default">搜索</button></span>
 							</div>
 						</form>
 					</div>
@@ -70,7 +70,7 @@
 										{{ $val->Humans }}
 										</td>
 										<td style="min-width:43px;pading:1px;">
-										<span><a onclick="{{ $val->id }}" class="btn btn-xs btn-primary">加入书架</a></span>
+										<span><a onclick="addShelf({{ $uid }},{{ $val->id }}, 0);" class="btn btn-xs btn-primary">加入书架</a></span>
 										</td>
 										</tr>
 									@endforeach
@@ -84,5 +84,80 @@
 					</div>
 				</div>
 			</div>
+			<div class="clearfix"></div>
+			<div style="padding-left:15px;padding-right:15px;">
+				<div class="panel panel-primary">
+				<div style="padding-top:0;padding-bottom:0;" class="panel-heading">
+					<a style="display:block;color:#fff;padding:10px 0;" data-toggle="collapse" href="#zonghengTop" aria-expanded="false" aria-controls="zonghengTop" class="collapsed">纵横月票榜<i class="fa fa-autocaret pull-right"></i></a>
+				</div>
+			</div>
+			<div id="zonghengTop" class="panel-collapse in">
+				<div class="panel-body text-indent">
+					@foreach($zongheng as $key => $val)
+				<div class="col-md-4 col-sm-12">
+				<div style="margin:0px;" class="booklist-item">
+					<div class="mod">
+						<div class="bd booklist-subject">
+							<div class="post">
+								<a href="/book/{{ $val->bookName }}" target="_blank"><img src="http://static.zongheng.com/upload/{{ $val->cover }}" style="max-height:125px;max-width:100px;"></a>
+							</div>
+							<div class="title">
+								<a href="/book/{{ $val->bookName }}" target="_blank">{{ $val->bookName }}</a>
+							</div>
+							<div class="abstract">
+								月票数:{{ $val->number }}<br>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			@endforeach
+			</div>
+			</div>
 		</div>
+		<div style="padding-left:15px;padding-right:15px;">
+				<div class="panel panel-primary">
+				<div style="padding-top:0;padding-bottom:0;" class="panel-heading">
+					<a style="display:block;color:#fff;padding:10px 0;" data-toggle="collapse" href="#qidianTop" aria-expanded="false" aria-controls="qidianTop" class="collapsed">起点月票榜<i class="fa fa-autocaret pull-right"></i></a>
+				</div>
+			</div>
+			<div id="qidianTop" class="panel-collapse collapse">
+				<div id='qidiantop' class="panel-body text-indent">
+
+			</div>
+			</div>
+		</div>
+		<div style="padding-left:15px;padding-right:15px;">
+			<div class="ys-friendlinks clearfix">
+			<h5 class="pull-left">友情链接：</h5>
+			<ul class="list-inline">
+				<li><a href="http://www.lkong.net" target="_blank">龙空论坛</a></li>
+				<li><a href="http://www.tiandizw.com" target="_blank">天地中文网</a></li>
+				<li><a href="http://yc.ireader.com.cn" target="_blank">掌阅小说网</a></li>
+				<li><a href="http://www.zhulang.com" target="_blank">逐浪中文网</a></li>
+				<li><a href="http://www.hongshu.com" target="_blank">红薯中文网</a></li>
+				<li><a href="http://www.quyuewang.cn/" target="_blank">趣阅中文网</a></li>
+				<li><a href="http://mm.17k.com " target="_blank">17K女生网</a></li>
+				<li><a href="http://www.tadu.com/" target="_blank">塔读文学</a></li>
+				<li><a href="http://www.ouj.com/" target="_blank">偶家中文网</a></li>
+			</ul>
+		</div>
+	</div>	
+		</div>
+	</div>		
+<script type="text/javascript">
+function Book(a, b, c, d, e, f, g, h, i, j, k) { 
+	this.BookId = a; this.BookName = b; this.AuthorId = c; this.AuthorName = d; this.CategoryId = e; this.CategoryName = f; this.Amount = g; this.BZ1 = h; this.BZ2 = i; this.BZ3 = j;
+	}
+</script>
+<script type="text/javascript" src="http://script.cmfu.com/Script/Top.js"></script>
+<script>
+$(function () {
+	var str = "";
+	for (var i = 0; i < TopMonthTicketPK.length ; i++) {
+		str += "<div class='col-md-6 col-sm-12'><div style='margin:0px;' class='booklist-item'><div class='mod'><div class='bd booklist-subject'><div class='post'><a href='/book/"+TopMonthTicketPK[i].BookName+"' target='_blank'><img src='"+TopMonthTicketPK[i].BZ1+"' style='max-height:125px;max-width:100px;'></a></div><div class='title'><a href='/book/"+TopMonthTicketPK[i].BookName+"' target='_blank'>"+TopMonthTicketPK[i].BookName+"</a></div><div class='abstract'>月票数:"+ TopMonthTicketPK[i].Amount+"<br></div></div></div></div></div>"
+	}
+	$("#qidiantop").append(str);
+})
+</script>
 @include("footer")

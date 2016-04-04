@@ -19,7 +19,11 @@ class IndexController extends Controller
     {
         $category = $this->category();
         $top = $this->top();
-        return view('test')->with(['category' => $category, 'top' => $top]);
+        //纵横月票api
+        $url = 'http://www.zongheng.com/ajax/rank.getZongHengMonthTicketRankList.do?rankType=1&pageNum=1&pageSize=15';
+        $json =  file_get_contents($url);
+        $zongheng = json_decode($json);
+        return view('test')->with(['category' => $category, 'zongheng' => $zongheng, 'top' => $top]);
     }
     //获取分类
     public function category(){

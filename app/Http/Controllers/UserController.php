@@ -127,4 +127,12 @@ class UserController extends Controller
         Session::forget('user.name');
         return  redirect()->back();
     }
+
+    //个人书架
+    public function shelf()
+    {
+
+
+        return view('shelf');
+    }
 }

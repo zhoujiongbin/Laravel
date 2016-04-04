@@ -10,7 +10,6 @@
 		<span class="copy">© 2016 游书网</span>
 	</div>
 </div>
-<script  src="http://guiyu.org/js/jquery-1.11.2.min.js"></script>
 <script  src="http://guiyu.org/js/bootstrap.min.js"></script>
 <script  src="http://guiyu.org/js/popover.js"></script>
 <script  src="http://guiyu.org/js/my.js"></script>

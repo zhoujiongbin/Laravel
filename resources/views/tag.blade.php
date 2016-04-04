@@ -70,9 +70,6 @@
 						</ul>
 					</div>
 					<div style="margin:1em 0;" class="books"> 
-						<ul style="margin-top:5px;margin-bottom:8px;" class="pagination pull-right">
-							{!! $book->appends($args)->render() !!}
-						</ul>
 						<p style="margin:0;padding:0;height:45px;" class="clearfix">
 						</p>
 						<div class="row">

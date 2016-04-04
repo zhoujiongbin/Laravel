@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="http://guiyu.org/css/bootstrap-switch.min.css">
 <link rel="stylesheet" href="http://guiyu.org/css/my.css">
 <link rel="stylesheet" href="http://guiyu.org/css/youshu.css">
+<script  src="http://guiyu.org/js/jquery-1.11.2.min.js"></script>
 </head>
 <body>
 <header class="navbar navbar-default navbar-fixed-top">
@@ -24,8 +25,8 @@
 	<div id="header-navbar" class="navbar-collapse collapse">
 		<ul class="nav navbar-nav">
 			<li><a href="http://www.yousuu.com/booklist">所有书单</a></li>
-			<li><a href="http://www.yousuu.com/comments">小说评论</a></li>
-			<li class="hidden-xs"><a href="http://www.lkong.net/" target="_blank">龙空论坛</a></li>
+			<li><a href="/comments">小说评论</a></li>
+			<li><a href="/top">排行榜</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 		@if($uid != 0)
