@@ -32,7 +32,7 @@ class IndexController extends Controller
     }
     //获取前10本加入数据库的小说
     public function Top(){
-        $top = DB::table('book')->orderBy('updatetime', 'desc')->take(10)->get();
+        $top = DB::table('book')->orderBy('updatetime', 'desc')->take(9)->get();
         foreach ($top as $key => $value) {
             $time =  $value->updatetime;
             $dd = Carbon::parse($time);

@@ -182,16 +182,19 @@ function comments(){
     var _token = $("input[name='_token']").val();
     var bookid = $("#bookid").val();
     var comment = $("#comment").val();
+    var rate = $("#rate").val();
     if(!comment){
         toastr.error("评论不能为空");
     } else if(comment.length > 300) {
         toastr.error("评论内容超过字数");
+    } else if(!rate){
+        toastr.error("请为本书打分");
     }else{
         $.ajax({
         type: "POST",
         dataType: "json",
         url: "http://guiyu.org/api/addComment",
-        data:{bookid:bookid,comment:comment,_token:_token},
+        data:{bookid:bookid,comment:comment,rate:rate,_token:_token},
         success: function(json) {
             if(json.status == "ok"){
                 toastr.success("评论成功");
@@ -214,6 +217,7 @@ function addBooklist(){
     var title = $("#title").val();
     var intro = $("#intro").val();
     var type = $("#type").val();
+    var listid = $("#listid").val();
     var _token = $("input[name='_token']").val();
     if(!title){
         toastr.error("标题不能为空");
@@ -224,7 +228,7 @@ function addBooklist(){
         type: "POST",
         dataType: "json",
         url: "http://guiyu.org/api/addBooklist",
-        data:{title:title,intro:intro,type:type,_token:_token},
+        data:{title:title,intro:intro,type:type,listid:listid,_token:_token},
         success: function(json) {
             if(json.status == "ok"){
                 toastr.success("操作成功");
@@ -235,4 +239,15 @@ function addBooklist(){
         }
         });
     }
+}
+
+function editBooklist(){
+    var title = $("#booklist").attr("data-title");
+    var intro = $("#booklist").attr("data-intro");
+    var type = $("#booklist").attr("data-type");
+    var listid = $("#booklist").attr("data-listid");
+    $("#title").val(title);
+    $("#intro").val(intro);
+    $("#type").val(type);
+    $("#listid").val(listid);
 }

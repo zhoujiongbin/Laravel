@@ -5,7 +5,6 @@
 			<li><a href="#">新手帮助</a></li>
 			<li><a href="#">推书指南</a></li>
 			<li><a href="javascript:;" onclick="">建议反馈</a></li>
-			<li><a href="#">移动应用</a></li>
 		</ul>
 		<span class="copy">© 2016 游书网</span>
 	</div>

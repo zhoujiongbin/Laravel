@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 //use Illuminate\Http\Request;
+use App\SphinxClient;
 use Illuminate\Support\Facades\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use DB;
+
 
 class APIController extends Controller
 {
@@ -92,9 +94,63 @@ class APIController extends Controller
             $input = Request::all();
             $bookid = $input['bookid'];
             $comment =  $input['comment'];
+            $rate = $input['rate'];
+            $level = 'rate'.$rate;
             $toId  = isset($input['toId']) ? $input['toId'] : 0;
             DB::table('comment')->insert(['book_id' => $bookid, 'user_id' => $userid, 'content' => $comment, 'to' => $toId]);
+            $bookRate = DB::table('book_rate')->where('book_id', $bookid)->first();
+            if($bookRate){
+                $total = $bookRate->total+1;
+                $rate1 = $bookRate->rate1;
+                $rate2 = $bookRate->rate2;
+                $rate3 = $bookRate->rate3;
+                $rate4 = $bookRate->rate4;
+                $rate5 = $bookRate->rate5;
+                $Addrate = $$level + 1;
+                $rate = sprintf('%.2f',($rate1+2*$rate2+3*$rate3+4*$rate4+5*$rate5+$rate)/$total);
+                DB::table('book_rate')->where('book_id', $bookid)->update(['rate'=>$rate, $level=>$Addrate, 'total'=>$total]);
+            }else{
+                DB::table('book_rate')->insert(['book_id' => $bookid, 'total' => 1, $level => 1, 'rate' => $rate ]);
+                DB::table('book')->where('id', $bookid)->update(['rate'=> $rate]);
+            }
             return '{"status":"ok"}';
+        }
+    }
+
+    public function search(){
+
+        $input = Request::all();
+        $mode = 0; //SPH_MATCH_ALL
+        $host = "localhost";
+        $port = 9312;
+        $index = "*";
+        $word = trim($input['word']);
+        $limit = isset($input['num']) ? $input['num'] : 30;
+        if(strlen($word) > 1){
+            $q = $word;
+            $cl = new \NilPortugues\Sphinx\SphinxClient();
+            $cl->SetServer ( $host, $port );
+            $cl->SetConnectTimeout ( 1 );
+            $cl->SetArrayResult ( true );
+            $cl->SetMatchMode ( $mode );
+            $cl->setLimits(0, $limit);
+            $res = $cl->Query ( $q, $index );
+            foreach ($res['matches'] as $key => $value) {
+                $id = $value['id'];
+                $book[$key] = DB::table('book')->where('id', $id)->first();
+            }
+            $booklist = DB::select("select * from user where username like '%$word%' ");
+            $result = array();
+            if(isset($book)){
+                $result['status'] = 'ok';
+                $result['book'] = $book;
+            }
+            if(isset($booklist)){
+                $result['booklist'] = $booklist;
+            }
+             return json_encode($result);
+        } else {
+            return '{"status":"error","message":"请输入搜索词"}';
         }
     }
 

@@ -43,12 +43,14 @@ Route::get('user/{id}/comments', 'UserController@comment')->where('id', '[0-9]+'
 
 Route::get('user/{id}/booklist', 'UserController@booklist')->where('id', '[0-9]+');
 
+Route::get('booklist/{id}', 'BookListController@show')->where('id', '[0-9]+');
+
 Route::get('comments', 'BookController@allComments');
+
+Route::get('api/search', 'APIController@search');
 
 Route::get('top', function(){
 	return view('top');
 });
 
-Route::get('booklist', function(){
-	return view('booklist');
-});
+Route::get('booklist', 'BookListController@index');

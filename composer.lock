@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5c6026b96e6fa11a641b51a6ba976f5e",
-    "content-hash": "5bd58fd976f1ee3e9611bc37c006ec46",
+    "hash": "8627e4d55649108499e43e1ef8135350",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -792,6 +791,61 @@
                 "php"
             ],
             "time": "2015-12-04 15:28:43"
+        },
+        {
+            "name": "nilportugues/sphinx-search",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nilportugues/php-sphinx-search.git",
+                "reference": "7381e8439fc03577d9f980247cca949b44d5f5cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/nilportugues/php-sphinx-search/7381e8439fc03577d9f980247cca949b44d5f5cb.zip",
+                "reference": "7381e8439fc03577d9f980247cca949b44d5f5cb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "1.*",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "NilPortugues": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nil Portugués Calderó",
+                    "email": "contact@nilportugues.com",
+                    "homepage": "http://nilportugues.com",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Andrew Aksyonoff",
+                    "homepage": "http://sphinxsearch.com",
+                    "role": "Original Author"
+                }
+            ],
+            "description": "Fully unit tested SphinxClient (SphinxAPI) for PHP5.3 and above to be used with SphinxSearch",
+            "homepage": "https://github.com/nilopc/NilPortugues_PHP_Sphinx",
+            "keywords": [
+                "Sphinx Search",
+                "search",
+                "search engine",
+                "sphinx",
+                "sphinxapi"
+            ],
+            "time": "2016-03-11 14:34:26"
         },
         {
             "name": "paragonie/random_compat",

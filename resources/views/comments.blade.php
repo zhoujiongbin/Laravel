@@ -2,7 +2,7 @@
 
 <div class="container">
 <div class="row">
-@include("common.comments")->with(['comment' => $comment])
+@include("common.comments")
 </div>
 </div>
 

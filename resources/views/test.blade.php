@@ -4,7 +4,7 @@
 		<div class="row">
 			<div class="sokk-index-left col-sm-3 col-md-3 col-lg-3 col-xs-12">
 				<div class="hidden-xs">
-					<ul style="background-color:#4596d3;" class="nav nav-stacked">
+					<ul style="background-color:#337AB7;" class="nav nav-stacked">
 					@foreach($category as $key => $value)
 						@if($key == 0)
 							<li class="start">
@@ -22,9 +22,6 @@
 			<div class="col-sm-9 col-md-9 col-lg-9 col-xs-12">
 				<div class="center-block sokk-index-middle">
 					<div class="online">
-						<div style="margin-left:10px;" class="sd pull-right">
-							<button onclick="" class="btn btn-primary">添加新书</button>
-						</div>
 						<form id="globalsearchform" style="margin-bottom:10px;" onsubmit="" class="form">
 							<div class="input-group">
 								<input id="globalsearchtxt" type="text" name="searchTextInput" placeholder="输入书名/作者名/书单" class="form-control"><span class="input-group-btn"><button type="button" onclick="ys.common.globalsearch()" class="btn btn-default">搜索</button></span>
@@ -32,9 +29,9 @@
 						</form>
 					</div>
 					<div class="panel panel-default sokk-index-middle-panel">
-						<div class="panel-body">
+						<div class="panel-body" style="overflow-y: hidden;">
 							<div class="sokk-panel-table">
-								<table class="table table-condensed sokk-index-middle-table">
+								<table class="table table-bordered sokk-index-middle-table">
 								<thead>
 								<tr>
 									<th>
@@ -78,8 +75,8 @@
 								</table>
 							</div>
 						</div>
-						<div class="panel-footer">
-							<a href="/shelf" style="text-align:center;font-size: 14px;" class="center-block">点击进入书架</a>
+						<div class="panel-footer" style="background-color: #337AB7;">
+							<a href="/bookshelf" style="text-align:center;font-size: 14px;color:#fff;padding:2px 0;" class="center-block" >点击进入书架</a>
 						</div>
 					</div>
 				</div>

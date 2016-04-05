@@ -66,7 +66,8 @@ class BookController extends Controller
         }
         $comment = $this->comments($id);
         $intro = DB::table('book_intro')->where('id', $id)->first();
-        return view('book')->with(['book' => $bookInfo, 'intro' => $intro->intro, 'comment' => $comment]);
+        $bookRate = DB::table('book_rate')->where('book_id', $id)->first();
+        return view('book')->with(['book' => $bookInfo, 'bookRate' => $bookRate,'intro' => $intro->intro, 'comment' => $comment]);
 
     }
 
@@ -176,6 +177,11 @@ class BookController extends Controller
                 $dd = Carbon::parse($time);
                 $book[$key]->Humans  = $dd->diffForHumans(Carbon::now());   //2年前、
                 $book[$key]->wordnum = sprintf('%.2f', ($value->word/10000));
+                $tmp = DB::table('book_rate')->where('book_id', $value->id)->first();
+                if($tmp){
+                    $book[$key]->rate = $tmp->rate;
+                    $book[$key]->total = $tmp->total;
+                } 
             }
             $wordOption = array(1=>'10万字以下', 2 =>'10万-30万', 3=>'30万-50万', 4=>'50万-100万', 5=>'100万-200万', 6=>'200万字以上');
             return  view('tag')->with(['tagId' => $tagId, 'sortid'=>$sortid, 'wordnum'=>$id, 'name'=>$name, 'wordOption' => $wordOption, 'args' => $args, 'tag' => $tag, 'book' => $book]);

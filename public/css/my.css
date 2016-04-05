@@ -1,6 +1,7 @@
 body{
     padding-top:70px;
     font-family: "Classic Grotesque W01",Arial,"STHeiti","Microsoft YaHei","WenQuanYi Micro Hei",SimSun,sans-serif;
+    background-color: #f5f5f5;
 }
 .navbar-toggle{height:35px;width:44px;}
 .common-footer{clear: both;text-align: right;}
@@ -839,7 +840,7 @@ margin-bottom: 10px;
   background-color: #f8f8f8;
   padding-top: 15px;
   margin-bottom: 10px;
-  background-image: url(http://guiyu.org/images/bg.jpg);
+  background-image: url(http://guiyu.org/images/bg2.jpg);
 }
 .ys-userpage-leftpane{
   margin-bottom: 1em;

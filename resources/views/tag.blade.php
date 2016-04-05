@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="sokk-index-left col-sm-3 col-md-2 col-lg-2 col-xs-12">
 				<div class="hidden-xs">
-					<ul style="background-color:#4596d3;" class="nav nav-stacked categorynav">
+					<ul style="background-color:#337AB7;" class="nav nav-stacked categorynav">
 						@if($tagId == 0)
 							<li class="start active">
 						@else
@@ -100,13 +100,13 @@
 												<a href="/book/{{ $val->id }}" target="_blank">{{ $val->name }}</a>
 											</div>
 											<div class="rating">
-												<span class="allstar00"></span><span class="rating_nums"></span><span>(0人评价)</span>
+												<span class="allstar00"></span><span class="rating_nums"></span><span>({{ $val->total or 0 }}人评价)</span>
 											</div>
 											<div class="abstract">
 												作者: {{ $val->author }}<br>
 												字数: {{ $val->wordnum }}万<br>
 												最后更新: {{ $val->Humans}}<br>
-												综合评分: <span class="num2star">0.0</span>
+												综合评分: <span class="num2star">{{ $val->rate or 0.0 }}</span>
 											</div>
 										</div>
 									</div>
@@ -116,14 +116,6 @@
 						</div>
 						<ul style="margin-top:5px;margin-bottom:8px;" class="pagination pull-right">
 							{!! $book->appends($args)->render() !!}
-
-							<!-- <li><a href="javascript:;" onclick="ys.common.jumpurl('page',null)">«</a></li>
-							<li class="active"><a href="javascript:;" onclick="ys.common.jumpurl('page',1)">1       </a></li>
-							<li><a href="javascript:;" onclick="ys.common.jumpurl('page',2)">2       </a></li>
-							<li><a href="javascript:;" onclick="ys.common.jumpurl('page',3)">3       </a></li>
-							<li><a href="javascript:;" onclick="ys.common.jumpurl('page',4)">4       </a></li>
-							<li><a href="javascript:;" onclick="ys.common.jumpurl('page',5)">5       </a></li>
-							<li><a href="javascript:;" onclick="ys.common.jumpurl('page',829)">» </a></li> -->
 						</ul>
 						<p style="margin:0;padding:0;height:30px;" class="clearfix">
 						</p>

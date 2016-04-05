@@ -31,39 +31,37 @@
 					</div>
 					<div class="clearfix">
 						<div class="ys-book-averrate xs-align-left">
-							<span style="font-size:20px;color:#4d7bd6">&nbsp;<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>&nbsp;5.9</span><small>&nbsp;&nbsp;本书共有16个评价</small>
+							<span style="font-size:20px;color:#4d7bd6">书友评分:&nbsp;{{ $bookRate->rate or 0 }}</span><small>&nbsp;&nbsp;本书共有{{ $bookRate->total or 0 }}个评价</small>
 						</div>
 					</div>
 					<div class="rate-bar-chart">
 						<div class="progress">
-							<div style="width:1.6%" class="progress-bar progress-bar-primate">
-							</div>
-							<div style="width:25%" class="progress-bar progress-bar-hidden">
-								1.6%
+							<div style="width:{{  isset($bookRate) ? $bookRate->rate1/$bookRate->total * 100 : 0 }}%" class="progress-bar progress-bar-primate">
+							{{  isset($bookRate) ? $bookRate->rate1/$bookRate->total * 100 : 0 }}%
 							</div>
 						</div>
 						<div class="progress">
-							<div style="width:40.3%" class="progress-bar progress-bar-primate">
-								40.3%
+							<div style="width:{{ isset($bookRate) ? $bookRate->rate2/$bookRate->total * 100 : 0 }}%" class="progress-bar progress-bar-primate">
+								{{ isset($bookRate) ? $bookRate->rate2/$bookRate->total * 100 : 0 }}%
 							</div>
 						</div>
 						<div class="progress">
-							<div style="width:25.0%" class="progress-bar progress-bar-primate">
-								25.0%
+							<div style="width:{{ isset($bookRate) ? $bookRate->rate3/$bookRate->total * 100 : 0 }}%" class="progress-bar progress-bar-primate">
+								{{ isset($bookRate) ? $bookRate->rate3/$bookRate->total * 100 : 0 }}%
 							</div>
 						</div>
 						<div class="progress">
-							<div style="width:20.2%" class="progress-bar progress-bar-primate">
-								20.2%
+							<div style="width:{{ isset($bookRate) ? $bookRate->rate4/$bookRate->total * 100 : 0 }}%" class="progress-bar progress-bar-primate">
+								{{ isset($bookRate) ? $bookRate->rate4/$bookRate->total * 100 : 0 }}%
 							</div>
 						</div>
 						<div class="progress">
-							<div style="width:12.9%" class="progress-bar progress-bar-primate">
-								12.9%
+							<div style="width:{{ isset($bookRate) ? $bookRate->rate5/$bookRate->total * 100 : 0 }}%" class="progress-bar progress-bar-primate">
+								{{ isset($bookRate) ? $bookRate->rate5/$bookRate->total * 100 : 0 }}%
 							</div>
 						</div>
 						<div style="height:40px;line-height:40px;" class="xs-align-left">
-							<span style="font-size:18px">我的评分: &nbsp;</span><span id="myrate" style="font-size:21px;" data-bid="{{ $book->id }}" data-rate="1"><i style="color:#4d7bd6" class="fa fa-star"></i><i style="color:#ccc" class="fa fa-star"></i><i style="color:#ccc" class="fa fa-star"></i><i style="color:#ccc" class="fa fa-star"></i><i style="color:#ccc" class="fa fa-star"></i></span><span>&nbsp;</span><span id="myratelabel" style="font-size:18px;width:56px;display:inline-block;">剧毒</span>
+							
 						</div>
 					</div>
 				</div>
@@ -107,6 +105,13 @@
 					{!! csrf_field() !!}
 					<div class="media">
 						<input type="hidden" id="bookid" name="bookid" value="{{ $book->id }}"><button onclick="comments(0);" class="pull-right btn btn-primary btn-sm">发表书评</button><a href="/user/{{ $uid }}/comments" target="_blank" class="pull-left"><img src="http://guiyu.org/images/logo.png"  class="img-rounded img48"></a>
+						<select id="rate" name="rate" style="margin-right: 12px;width: 100px;" autocomplete="off" class="form-control pull-right ">
+						<option value="">选择评分</option>
+							<option value="1">★</option>
+							<option value="2">★★</option>
+							<option value="3">★★★</option>
+							<option value="4">★★★★</option>
+							<option value="5">★★★★★</option>
 						<div class="media-body">
 							<span class="media-heading f16">{{ $username }}</span><br>
 						</div>
@@ -136,7 +141,7 @@
 				</p>
 				<hr>
 				<div data-id='{{ $val->id }}' style="width:100%" class="btn-group">
-					<button type="button" onclick="" style="width:50%" class="btn btn-default"><i class="fa fa-heart-o"></i>&nbsp;喜欢 <span class="num"></span></button><button type="button"  style="width:50%" class="btn btn-default"><i class="fa fa-reply"></i>&nbsp;评论<span class="num"></span></button>
+					<button type="button" onclick="love({{ $val->id }})" style="width:50%" class="btn btn-default"><i class="fa fa-heart-o"></i>&nbsp;喜欢 <span class="num"></span></button><button type="button" onclick="response({{ $val->id }});"  style="width:50%" class="btn btn-default"><i class="fa fa-reply"></i>&nbsp;评论<span class="num"></span></button>
 				</div>
 			</div>
 		</div>
