@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>鬼雨游书网</title>
-<meta name="Description" content="游书网(www.youshu.com)集小说搜索、追更阅读、读者评分、书单推荐于一体，不但可以追看小说最新更新，还可以解决书荒寻找到更多更好看的小说，在这里你可以阅读、评论、推荐、打分、吐槽，尽情的与其他书友一起分享关于阅读的快乐。欢迎大家加入游书网">
+<meta name="Description" content="鬼雨游书网集小说搜索、追更阅读、读者评分、书单推荐于一体，不但可以追看小说最新更新，还可以解决书荒寻找到更多更好看的小说，在这里你可以阅读、评论、推荐、打分、吐槽，尽情的与其他书友一起分享关于阅读的快乐。欢迎大家加入游书网">
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <link rel="icon" href="/images/logo.ico" type="image/x-icon">

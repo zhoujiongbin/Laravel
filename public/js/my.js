@@ -251,3 +251,72 @@ function editBooklist(){
     $("#type").val(type);
     $("#listid").val(listid);
 }
+
+function chooseBook(id,name){
+    var id = id;
+    var name = name;
+    $("#bookid").val(id);
+    $("#bookname").val(name);
+    $("#tt").css("display","none");
+}
+
+function search(){
+    var word = $("#bookname").val();
+    var num = 5;
+    if(word.length > 1){
+        $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "http://guiyu.org/api/search",
+        data:{word:word,num:num},
+        success: function(json) {
+            var str = "";
+            if(json.status == "ok"){
+                for(var i in json.book){
+                    str +="<tr  onclick=\"chooseBook("+ json.book[i].id +",'"+ json.book[i].name +"')\"><td>"+ json.book[i].name+"</td><td >"+ json.book[i].author+"</td></tr>";
+                }
+            } else{
+                toastr.error(json.message);
+            }
+            $("#search").html(str);
+            $("#tt").css("display","block");
+            }
+        });
+    }
+}
+function addBookListDetail(uid){
+    var bookname  = $("#bookname").val();
+    var bookid = $("#bookid").val();
+    var rate = $("#rate").val();
+    var booklistid = $("#booklistid").val();
+    var _token = $("input[name='_token']").val();
+    var comment = $("#comment").val();
+    if(!bookname){
+        toastr.error("书名不能为空");
+    } else if(!comment){
+        toastr.error("评论不能为空");
+    } else if(!rate){
+        toastr.info("请为本书打分");
+    } else if(bookname && ! bookid){
+        toastr.error("不存在该书为空");
+    }else{
+        $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "http://guiyu.org/api/addBook",
+        data:{userid:uid,bookid:bookid,comment:comment,rate:rate,booklistid:booklistid,_token:_token},
+        success: function(json) {
+            if(json.status == "ok"){
+                toastr.success("操作成功");
+                window.location.reload();
+            } else{
+                toastr.error(json.message);
+            }
+        }
+        });
+    }
+}
+
+function delBooklist(id){
+    toastr.error("禁止删除");
+}

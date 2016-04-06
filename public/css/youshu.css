@@ -214,3 +214,9 @@
 	margin: 0 0!important; 
 	display: block!important;
 }
+.search{
+  z-index:999;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 0 3px #fff;
+}

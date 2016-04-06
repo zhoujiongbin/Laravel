@@ -133,9 +133,14 @@ class APIController extends Controller
             $cl->SetConnectTimeout ( 1 );
             $cl->SetArrayResult ( true );
             $cl->SetMatchMode ( $mode );
-            $cl->setLimits(0, $limit);
             $res = $cl->Query ( $q, $index );
+            if($res['total_found'] == 0) {
+                return '{"status":"ok"}';
+            }
             foreach ($res['matches'] as $key => $value) {
+                if($limit <= $key ){
+                    break;
+                }
                 $id = $value['id'];
                 $book[$key] = DB::table('book')->where('id', $id)->first();
             }

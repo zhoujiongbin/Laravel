@@ -15,7 +15,7 @@
 					<a href="{{ $book->source_url }}" target="_blank" class="hidden-xs pull-left"><img src="{{ $book->img_url }}" class="bookavatar"><button style="margin-top:-3px" class="btn btn-primary btn-block">开始阅读</button></a><a href="{{ $book->source_url }}" target="_blank" class="visible-xs pull-left"><img src="{{ $book->img_url }}" class="bookavatar"><button style="margin-top:-3px" class="btn btn-primary btn-block">开始阅读</button></a>
 					<div class="media-body ys-bookmain">
 						<ul class="list-unstyled list-sm">
-							<li>作者:<a href="/search/{{ $book->author }}?type=author" target="_blank">{{ $book->author }}</a></li>
+							<li>作者:<a href="/search?word={{ $book->author }}" target="_blank">{{ $book->author }}</a></li>
 							<li>字数: {{ $book->word }}字 </li>
 							<li>章节数: {{ $book->chapter }}章 </li>
 							<li>来自: {{ $book->source }}</li>
@@ -79,9 +79,6 @@
 						<button onclick="addShelf({{ $uid }},{{ $book->id }},2);" class="sokk-readstate-btn btn btn-default">养肥本书</button>
 						<button onclick="addShelf({{ $uid }},{{ $book->id }},1);" class="sokk-readstate-btn btn btn-default">已看本书</button>
 					</div>
-					<div class="btn-group">
-						<button onclick="ys.book.tobooklist();" class="btn btn-warning">加入推书单</button>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -112,6 +109,7 @@
 							<option value="3">★★★</option>
 							<option value="4">★★★★</option>
 							<option value="5">★★★★★</option>
+						</select>
 						<div class="media-body">
 							<span class="media-heading f16">{{ $username }}</span><br>
 						</div>

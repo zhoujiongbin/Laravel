@@ -22,9 +22,9 @@
 			<div class="col-sm-9 col-md-9 col-lg-9 col-xs-12">
 				<div class="center-block sokk-index-middle">
 					<div class="online">
-						<form id="globalsearchform" style="margin-bottom:10px;" onsubmit="" class="form">
+						<form id="globalsearchform" style="margin-bottom:10px;" action="/search" method="get" class="form">
 							<div class="input-group">
-								<input id="globalsearchtxt" type="text" name="searchTextInput" placeholder="输入书名/作者名/书单" class="form-control"><span class="input-group-btn"><button type="button" onclick="ys.common.globalsearch()" class="btn btn-default">搜索</button></span>
+								<input id="globalsearchtxt" type="text" name="word" placeholder="输入书名/作者名/书单" class="form-control"><span class="input-group-btn"><button type="submit"  class="btn btn-default">搜索</button></span>
 							</div>
 						</form>
 					</div>

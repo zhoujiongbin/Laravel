@@ -18,10 +18,10 @@
 							</p>
 						</div>
 						<ul style="padding-top:10px" class="nav nav-pills">
-							<li  class="active"  class="start"><a href="/user/{{ $uid }}/comments"><span>评论</span></a></li>
-							<li><a href="/user/{{ $uid }}/booklist"><span>书单</span></a></li>
+							<li  class="active"  class="start"><a href="/user/{{ $id }}/comments"><span>评论</span></a></li>
+							<li><a href="/user/{{ $id }}/booklist"><span>书单</span></a></li>
 							<li><a href="/bookshelf"><span>书架</span></a></li>
-							<li><a href="/user/{{ $uid }}/setting"><span>个人设置</span></a></li>
+							@if($id == $uid)<li><a href="/user/{{ $id }}/setting"><span>个人设置</span></a></li>@endif
 						</ul>
 					</div>
 				</div>

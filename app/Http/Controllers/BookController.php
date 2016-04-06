@@ -188,4 +188,36 @@ class BookController extends Controller
         }
     }
 
+    public function search(){
+        $input = Request::all();
+        $mode = 0; //SPH_MATCH_ALL
+        $host = "localhost";
+        $port = 9312;
+        $index = "*";
+        $word = trim($input['word']);
+        $limit = isset($input['num']) ? $input['num'] : 30;
+        if(strlen($word) > 1){
+            $q = $word;
+            $cl = new \NilPortugues\Sphinx\SphinxClient();
+            $cl->SetServer ( $host, $port );
+            $cl->SetConnectTimeout ( 1 );
+            $cl->SetArrayResult ( true );
+            $cl->SetMatchMode ( $mode );
+            $res = $cl->Query ( $q, $index );
+            if($res['total_found'] == 0) {
+                return '{"status":"ok"}';
+            }
+            foreach ($res['matches'] as $key => $value) {
+                if($limit <= $key ){
+                    break;
+                }
+                $id = $value['id'];
+                $book[$key] = DB::table('book')->where('id', $id)->first();
+            }
+            $booklist = DB::select("select * from user where username like '%$word%' ");
+            return view('search')->with(['book' => $book, 'booklist' => $booklist]);
+    }
+
+}
+
 }

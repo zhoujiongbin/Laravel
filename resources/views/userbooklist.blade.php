@@ -6,7 +6,7 @@
 			<div class="row">
 				<div class="col-sm-5 col-md-4 col-lg-3 col-xs-12 col-md-push-8 col-lg-push-9 col-sm-push-7">
 					<div style="margin:0 auto;text-align:center;">
-						<img src="http://guiyu.org/images/logo.png" style="height: 120px;width: 120px;" class="img-rounded">
+						<img src="/images/logo.png" style="height: 120px;width: 120px;" class="img-rounded">
 						<h4>{{ $user->username }}</h4>
 					</div>
 				</div>
@@ -18,10 +18,10 @@
 							</p>
 						</div>
 						<ul style="padding-top:10px" class="nav nav-pills">
-							<li class="start"><a href="/user/{{ $uid }}/comments"><span>评论</span></a></li>
-							<li  class="active"><a href="/user/{{ $uid }}/booklist"><span>书单</span></a></li>
+							<li class="start"><a href="/user/{{ $id }}/comments"><span>评论</span></a></li>
+							<li  class="active"><a href="/user/{{ $id }}/booklist"><span>书单</span></a></li>
 							<li><a href="/bookshelf"><span>书架</span></a></li>
-							<li><a href="/user/{{ $uid }}/setting"><span>个人设置</span></a></li>
+							@if($id == $uid)<li><a href="/user/{{ $id }}/setting"><span>个人设置</span></a></li>@endif
 						</ul>
 					</div>
 				</div>

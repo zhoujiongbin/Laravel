@@ -28,7 +28,7 @@
 		</td>
 		<td class="fixedwidth2">
 			<p>
-				{{ $username }}
+				{{ $val->username }}
 			</p>
 			<p>
 				用户

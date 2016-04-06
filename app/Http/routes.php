@@ -54,3 +54,7 @@ Route::get('top', function(){
 });
 
 Route::get('booklist', 'BookListController@index');
+
+Route::post('api/addBook', 'BookListController@addBook');
+
+Route::get('search', 'BookController@search');

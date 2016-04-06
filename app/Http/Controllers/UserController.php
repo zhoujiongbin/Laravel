@@ -93,7 +93,7 @@ class UserController extends Controller
             $booklistcount = DB::table('booklist')->where('user_id', $id)->count();
             $commentcount  = DB::table('comment')->where('user_id', $id)->count();
             $shelfcount    = DB::table('bookshelf')->where('user_id', $id)->where('status', 1)->count();
-            return view('setting')->with(['user' => $userInfo,'booklistcount' => $booklistcount, 'commentcount' => $commentcount, 'shelfcount' => $shelfcount]);
+            return view('setting')->with(['user' => $userInfo,'booklistcount' => $booklistcount, 'commentcount' => $commentcount, 'shelfcount' => $shelfcount, 'id' => $id]);
         }else{
             $input = Request::all();
             $email = $input['email'];
@@ -132,7 +132,7 @@ class UserController extends Controller
         $booklistcount = DB::table('booklist')->where('user_id', $id)->count();
         $commentcount  = DB::table('comment')->where('user_id', $id)->count();
         $shelfcount    = DB::table('bookshelf')->where('user_id', $id)->where('status', 1)->count();
-        return view('usercomments')->with(['comment' => $info, 'user' => $userInfo,'booklistcount' => $booklistcount, 'commentcount' => $commentcount, 'shelfcount' => $shelfcount]);
+        return view('usercomments')->with(['comment' => $info, 'user' => $userInfo,'booklistcount' => $booklistcount, 'commentcount' => $commentcount, 'shelfcount' => $shelfcount, 'id' => $id]);
     }
 
     public function booklist($id){
@@ -144,8 +144,9 @@ class UserController extends Controller
         foreach ($booklist as $key => $value) {
             $dd = Carbon::parse($value->updatetime);
             $booklist[$key]->Humans = $dd->diffForHumans(Carbon::now());   //2年前
-        }
-        return view('userbooklist')->with(['user' => $userInfo, 'booklist' => $booklist, 'booklistcount' => $booklistcount, 'commentcount' => $commentcount, 'shelfcount' => $shelfcount]);
+            $booklist[$key]->username = DB::table('user')->where('id', $value->user_id)->pluck('username');
+            }
+        return view('userbooklist')->with(['user' => $userInfo, 'booklist' => $booklist, 'booklistcount' => $booklistcount, 'commentcount' => $commentcount, 'shelfcount' => $shelfcount, 'id' => $id]);
     }
 
     /**

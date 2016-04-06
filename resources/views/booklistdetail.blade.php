@@ -41,7 +41,7 @@
 				<div class="sokk-book-buttons clearfix">
 					@if($info->user_id == $uid)
 					<div class="pull-left">
-						<button id="booklist" data-target="#editbooklist" data-toggle="modal" onclick="editBooklist()" data-listid="{{ $info->id }}" data-title="{{ $info->title }}" data-intro="{{ $info->intro }}" data-type="{{ $info->type }}"  class="btn btn-primary">编辑推书单 </button><button onclick="" class="btn btn-primary">添加图书</button><button onclick="" class="btn btn-danger">删除推书单</button>
+						<button id="booklist" data-target="#editbooklist" data-toggle="modal" onclick="editBooklist()" data-listid="{{ $info->id }}" data-title="{{ $info->title }}" data-intro="{{ $info->intro }}" data-type="{{ $info->type }}"   class="btn btn-primary">编辑推书单 </button><button  data-target="#addbook" data-toggle="modal" class="btn btn-primary">添加图书</button><button onclick="delBooklist({{ $info->id }})" class="btn btn-danger">删除推书单</button>
 					</div>
 					@endif
 					<div class="ys-booklist-starBtn">
@@ -50,65 +50,67 @@
 				</div>
 				<div style="background-color:#eee;border-radius: 4px;" class="sort">
 					<ul class="nav nav-pills">
-						<li class="active"><a href="/booklist/5702729c20a3ed9476d1b976" class="btn">最新加入</a></li>
-						<li><a href="/booklist/5702729c20a3ed9476d1b976?sort=rate" class="btn">评分高低</a></li>
+						<li class="active"><a href="/booklist/{{ $info->id }}" class="btn">最新加入</a></li>
+						<li><a href="/booklist/{{ $info->id }}?sort=rate" class="btn">评分高低</a></li>
 					</ul>
 				</div>
 				<div class="ro">
 					<div>
-						<div id="listbook_22873" class="booklist-item">
+						<div  class="booklist-item">
+							@foreach($bookList as $key => $val)
 							<div class="mod">
 								<div class="hd">
-									<span class="pos">1</span>
+									<span class="pos">{{ $key + 1 }}</span>
 								</div>
 								<div class="bd booklist-subject">
-									<div data-bid="22873" data-shelfstat="false" data-menu="right" class="pull-right hidden-xs btn-group initshelf">
-										<a onclick="ys.common.changeBookShelfState(this)" data-state="follow" data-bid="22873" class="btn btn-primary">加入书架</a>
+									<div data-menu="right" class="pull-right hidden-xs btn-group initshelf">
+										<a onclick="addShelf({{ $uid }}, {{ $val->bookInfo->id }}, 0);" class="btn btn-primary">加入书架</a>
 										<div class="btn-group">
 											<button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-primary"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
 											<ul role="menu" class="dropdown-menu dropdown-menu-right">
-												<li><a href="javascript:;" onclick="ys.common.changeBookShelfState(this);" data-state="wait" data-bid="22873"> 加入待看 </a></li>
-												<li><a href="javascript:;" onclick="ys.common.changeBookShelfState(this);" data-state="already" data-bid="22873"> 已经看完 </a></li>
+												<li><a href="javascript:;" onclick="addShelf({{ $uid }}, {{ $val->bookInfo->id }}, 0);" > 加入待看 </a></li>
+												<li><a href="javascript:;" onclick="addShelf({{ $uid }}, {{ $val->bookInfo->id }}, 1);"> 已经看完 </a></li>
 												<li class="divider"></li>
 												<li><a href="javascript:;">取消</a></li>
 											</ul>
 										</div>
 									</div>
 									<div class="post">
-										<a href="/book/22873" target="_blank"><img src="http://img1.write.qq.com/upload/cover/2016-03-22/cb_56f11d1242e04.jpg" style="max-height:125px;max-width:100px;"></a>
+										<a href="/book/{{ $val->bookInfo->id }}" target="_blank"><img src="{{ $val->bookInfo->img_url }}" style="max-height:125px;max-width:100px;"></a>
 										<div data-cls="btn-block" data-bid="22873" data-shelfstat="false" data-nomenu="true" class="imgextra visible-xs-block initshelf">
 											<a onclick="ys.common.changeBookShelfState(this)" data-state="follow" data-bid="22873" class="btn btn-block btn-primary">加入书架</a>
 										</div>
 									</div>
 									<div class="title">
-										<a href="/book/22873" target="_blank">择天记</a>
+										<a href="/book/{{ $val->bookInfo->id }}" target="_blank">{{ $val->bookInfo->name }}</a>
 									</div>
 									<div class="rating">
-										<span class="allstar00"></span><span class="rating_nums"></span><span>(262人评价)</span>
+										<span class="allstar00"></span><span class="rating_nums"></span><span>({{ $val->bookRate->total }}人评价)</span>
 									</div>
 									<div class="abstract">
-										作者: 猫腻<br>
-										字数: 2231327<br>
-										最后更新: 16/04/04 16:54<br>
-										推荐指数: <span class="num2star"><i style="color:#4D7BD6" class="fa fa-star"></i><i style="color:#4D7BD6" class="fa fa-star"></i><i style="color:#4D7BD6" class="fa fa-star"></i><i style="color:#4D7BD6" class="fa fa-star"></i><i style="color:#4D7BD6" class="fa fa-star"></i></span>
+										作者: {{ $val->bookInfo->author }}<br>
+										字数: {{ $val->bookInfo->word }}<br>
+										最后更新: {{ $val->bookInfo->updatetime }}<br>
+										单主评分: <span class="num2star"> {{ $val->rate }}.0</span>
 									</div>
 									<div class="meta">
-										<span class="source">评分 : 6.3</span>
+										<span class="source">总体评分 : {{ $val->bookRate->rate }}</span>
 									</div>
 								</div>
 								<div class="ft clearfix">
 									<blockquote>
-										<span>评语：<span id="pyspan_22873">神人 神作者 顺心意</span></span>
+										<span>评语：<span id="pyspan_22873">{{ $val->comment->content }}</span></span>
 									</blockquote>
-									<time class="time"><span title="几秒前">几秒前加入书单                         </span></time>
-									<div data-listid="5702729c20a3ed9476d1b976" data-bid="22873" class="booklist-item-opt">
-										<a href="javascript:;" onclick="ys.common.editBookListBook(this)">修改评语</a><a href="javascript:;" onclick="ys.common.deleteBookListBook(this)">删除</a>
-									</div>
+									<time class="time"><span >{{ $val->Humans }}加入书单                         </span></time>
 								</div>
 							</div>
+							@endforeach
 						</div>
 					</div>
 				</div>
+				<ul style="margin-top:5px;margin-bottom:12px;" class="pagination pull-right">
+					{!! $bookList->render() !!}
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -143,6 +145,56 @@
 			</div>
 			<div class="modal-footer">
 				<a class="btn btn-default" data-dismiss="modal">取消</a><button type="button" onclick="addBooklist()" class="btn btn-primary">确定</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+<div id="addbook" tabindex="-1" role="dialog" aria-labelledby="book" aria-hidden="true" data-backdrop="false" class="modal fade">
+	<div class="modal-dialog modal-sm" style="width:600px">
+		<form class="modal-content" onsubmit="return false;" method="post">
+			{!! csrf_field() !!}
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="book">添加图书</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+				<input type="hidden" id="booklistid" name="booklistid" value="{{ $info->id }}">
+				<div class="row">
+					<div class="col-sm-8" style="padding-right:0px">
+					<input id="bookname"  onkeyup="search();"  type="text" name="bookname" placeholder="书名" class="form-control" value="">
+					<input id="bookid" name="bookid" type="hidden">
+					</div>
+					<div class="col-sm-1" style="padding:0px">
+					<button type="button" id="pull" class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#" style="position:static;"><span class="caret"></span></button>
+					</div>
+					<div class="col-sm-3" style="padding-rigth:0px">
+					<select id="rate" name="rate"  class="form-control">
+						<option value="">选择评分</option>
+							<option value="1">★</option>
+							<option value="2">★★</option>
+							<option value="3">★★★</option>
+							<option value="4">★★★★</option>
+							<option value="5">★★★★★</option>
+					</select>
+				</div>
+				<div class="clearfix"></div>
+				<div id="tt"  class="col-sm-8 search" style="display:none">
+					<table class="table">
+					<thead>
+					</thead>
+					<tbody id="search">
+					</tbody>
+					</table>
+					</div>
+				</div>
+				</div>
+				<textarea id="comment" name="comment" placeholder="评论" style="margin:6px 0 ;width:100%;height:80px;" class="form-control"></textarea>
+			</div>
+			<div class="modal-footer">
+				<a class="btn btn-default" data-dismiss="modal">取消</a><button type="button" onclick="addBookListDetail({{ $uid }})" class="btn btn-primary">确定</button>
 			</div>
 		</form>
 	</div>
