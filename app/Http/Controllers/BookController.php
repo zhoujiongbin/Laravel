@@ -190,6 +190,7 @@ class BookController extends Controller
 
     public function search(){
         $input = Request::all();
+
         $mode = 0; //SPH_MATCH_ALL
         $host = "localhost";
         $port = 9312;
@@ -205,7 +206,7 @@ class BookController extends Controller
             $cl->SetMatchMode ( $mode );
             $res = $cl->Query ( $q, $index );
             if($res['total_found'] == 0) {
-                return '{"status":"ok"}';
+                return view('errors.404');
             }
             foreach ($res['matches'] as $key => $value) {
                 if($limit <= $key ){
@@ -216,8 +217,9 @@ class BookController extends Controller
             }
             $booklist = DB::select("select * from user where username like '%$word%' ");
             return view('search')->with(['book' => $book, 'booklist' => $booklist]);
+    } else{
+        return view('errors.404');
     }
-
 }
 
 }
