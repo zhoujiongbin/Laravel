@@ -159,4 +159,13 @@ class APIController extends Controller
         }
     }
 
+    public function delete(){
+        $input = Request::all();
+        if(!$input['table'] || !$input['id']){
+            return '{"status":"error","message":"网络错误"}';
+        } else {
+            DB::table($input['table'])->where('id', $input['id'])->delete();
+            return '{"status":"ok"}';
+        }
+    }
 }

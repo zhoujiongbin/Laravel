@@ -33,7 +33,7 @@
                   <td>{{ $val->id }}</td>
                   <td>{{ $val->username }}</td>
                   <td>{{ $val->email }}</td>
-                 <td><a href="#">删除</a>  <a href="#">修改</a> <a href="#">新增</a>  </td>
+                 <td><a href="#" onclick="deleteItem('user', {{ $val->id }});" >删除</a>  <a href="#">修改</a> <a href="/sign">新增</a>  </td>
 
                 </tr>
                 @endforeach

@@ -30,7 +30,17 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        $input = Request::all();
+        if(!$input){
+            return view('admin.add');
+        } else {
+            $intro = $input['intro'];
+            unset($input['intro']);
+            unset($input['_token']);
+            $id = DB::table('book')->insertGetId($input);
+            DB::table('book_intro')->insertGetId(['id'=>$id,'intro'=>$intro]);
+            return  Redirect::to("book/$id");
+        }
     }
 
     /**
@@ -93,13 +103,26 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        //
+        $input = Request::all();
+        if(!$input){
+            $info = DB::table('book')->where('id', $id)->first();
+            $intro = DB::table('book_intro')->where('id', $id)->first();
+            $info->intro = $intro->intro;
+            return view('admin.book')->with(['info'=>$info]);
+        } else {
+          DB::table('book_intro')->where('id', $id)->update(['intro'=>$input['intro']]);
+          unset($input['intro']);
+          unset($input['id']);
+          unset($input['_token']);
+          DB::table('book')->where('id', $id)->update($input);
+          return  Redirect::to("book/$id");
+        }
+       
     }
     //获取全部评论
     public function allComments(){

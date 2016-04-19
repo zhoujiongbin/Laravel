@@ -35,7 +35,7 @@
                   <td><a href="/book/{{$val->id}}">{{ $val->name }}</a></td>
                   <td>{{ $val->author }}</td>
                   <td>{{ $val->updatetime}}
-                  <td><a href="#">删除</a>  <a href="#">修改</a> <a href="#">新增</a>  </td>
+                  <td><a href="#" onclick="deleteItem('book', {{ $val->id }});">删除</a>  <a href="/admin/book/add/{{ $val->id }}">修改</a> <a href="/admin/book/add">新增</a>  </td>
                 </tr>
                 @endforeach
               </tbody>

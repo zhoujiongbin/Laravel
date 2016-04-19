@@ -184,7 +184,7 @@ class UserController extends Controller
     {
         Session::forget('user.id');
         Session::forget('user.name');
-        return  Redirect::to('test');;
+        return  Redirect::to('test');
     }
 
     //个人书架

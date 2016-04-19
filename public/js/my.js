@@ -320,3 +320,21 @@ function addBookListDetail(uid){
 function delBooklist(id){
     toastr.error("禁止删除");
 }
+
+
+function deleteItem(table, id){
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "http://guiyu.org/api/delete",
+        data:{table:table,id:id},
+        success: function(json) {
+            if(json.status == "ok"){
+                toastr.success("操作成功");
+                window.location.reload();
+            } else{
+                toastr.error(json.message);
+            }
+        }
+    });
+}

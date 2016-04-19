@@ -56,3 +56,9 @@ Route::get('/admin/book', 'AdminController@book');
 Route::get('admin/user', 'AdminController@user');
 
 Route::get('admin/tag', 'AdminController@tag');
+
+Route::any('admin/book/add/{id}', 'BookController@update');
+
+Route::any('admin/book/add', 'BookController@create');
+
+Route::get('/api/delete', 'APIController@delete');

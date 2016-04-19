@@ -35,7 +35,7 @@
                   <td>{{ $val->tag }}</td>
                   <td>{{ $val->order }}</td>
                   <td>{{ $val->urlname}}
-                  <td><a href="#">删除</a>  <a href="#">修改</a> <a href="#">新增</a>  </td>
+                  <td><a href="#" onclick="deleteItem('tag', {{ $val->id }});">删除</a>  <a href="#">修改</a> <a href="#">新增</a>  </td>
                 </tr>
                 @endforeach
               </tbody>
