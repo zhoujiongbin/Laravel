@@ -87,10 +87,11 @@ class BookListController extends Controller
        $userInfo = DB::table('user')->where('id', $userid)->first();
        $bookList = DB::table('booklist_detail')->where('booklist_id', $id);
        if(isset($input['sort'])){
-        $bookList = $bookList->orderBy('rate','desc')->simplepaginate(10);
+        $bookList = $bookList->orderBy('rate','desc');
        }else{
-        $bookList = $bookList->simplepaginate(2);
+        $bookList = $bookList->orderBy('updatetime','desc');
        }
+       $bookList = $bookList->simplepaginate(10);
        foreach ($bookList as $key => $val) {
            $bookList[$key]->bookInfo = DB::table('book')->where('id', $val->book_id)->first();
            $bookList[$key]->comment = DB::table('comment')->where('id', $val->comment_id)->first();

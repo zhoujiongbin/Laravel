@@ -190,7 +190,6 @@ class BookController extends Controller
 
     public function search(){
         $input = Request::all();
-
         $mode = 0; //SPH_MATCH_ALL
         $host = "localhost";
         $port = 9312;
@@ -215,8 +214,7 @@ class BookController extends Controller
                 $id = $value['id'];
                 $book[$key] = DB::table('book')->where('id', $id)->first();
             }
-            $booklist = DB::select("select * from user where username like '%$word%' ");
-            return view('search')->with(['book' => $book, 'booklist' => $booklist]);
+            return view('search')->with(['book' => $book]);
     } else{
         return view('errors.404');
     }
