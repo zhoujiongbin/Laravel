@@ -44,10 +44,10 @@ class BookListController extends Controller
             $title = $input['title'];
             $intro = $input['intro'];
             $type  = $input['type'];
-            $listid = $input['listid'];
-            if(!$listid){
+            if(!isset($input['listid'])){
                 $id = DB::table('booklist')->insertGetId(['user_id' => $userid,'title' => $title, 'intro' => $intro, 'type' => $type]);
             } else{
+                $listid = $input['listid'];
                 DB::table('booklist')->where('id', $listid)->update(['user_id' => $userid,'title' => $title, 'intro' => $intro, 'type' => $type]);
                 $id = $listid;
             }

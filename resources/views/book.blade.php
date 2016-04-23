@@ -136,6 +136,9 @@
 				</div>
 				<p class="commentcontent">
 					{{ $val->content }}
+					@if($val->status == 1)
+						<span class="pull-right">(本书评来自书单 <a href="/booklist/{{$val->to}}">{{$val->booklist}}</a>)</span>
+					@endif
 				</p>
 				<hr>
 				<div data-id='{{ $val->id }}' style="width:100%" class="btn-group">

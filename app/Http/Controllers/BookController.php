@@ -93,10 +93,14 @@ class BookController extends Controller
     }
     //获取评论
     public function comments($id){
-        $info = DB::table('comment')->where('book_id', $id)->where('to', 0)->orderBy('updatetime', 'desc')->take(20)->get();
+        $info = DB::table('comment')->where('book_id', $id)->orderBy('updatetime', 'desc')->take(20)->get();
         foreach ($info as $key => $value) {
-            $tmp = DB::table('user')->where('id', $value->user_id)->first();
+           $tmp = DB::table('user')->where('id', $value->user_id)->first();
             $info[$key]->username = $tmp->username;
+            if($value->status == 1){
+                $tmp = DB::table('booklist')->where('id', $value->to)->first();
+                $info[$key]->booklist = $tmp->title;
+            }
         }
         return $info;
     }
@@ -126,7 +130,7 @@ class BookController extends Controller
     }
     //获取全部评论
     public function allComments(){
-        $info = DB::table('comment')->where('to', 0)->orderBy('updatetime', 'desc')->simplepaginate(20);
+        $info = DB::table('comment')->orderBy('updatetime', 'desc')->simplepaginate(20);
          foreach ($info as $key => $value) {
             $tmp = DB::table('user')->where('id', $value->user_id)->first();
             $info[$key]->username = $tmp->username;
